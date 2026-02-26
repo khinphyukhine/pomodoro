@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import './Home.css';
 import { MIN_RADIUS, MAX_RADIUS, COLORS } from './Constants.tsx';
+import Timer from './Timer.tsx';
 
 type CircleSpec = {
   cx: number;
@@ -148,6 +149,7 @@ export default function Home() {
             />
           ))}
         </svg>
+        <Timer />
       </div>
     </div>
   );

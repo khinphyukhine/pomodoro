@@ -1,0 +1,20 @@
+.timer {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: clamp(32px, 6vw, 96px);
+  letter-spacing: 0.1em;
+
+  color: #ffffff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
+
+  background: rgba(0, 0, 0, 0.35);
+  padding: 12px 20px;
+  border-radius: 12px;
+
+  backdrop-filter: blur(6px);
+  pointer-events: none;
+}
