@@ -2,6 +2,8 @@
 
 A React-based Pomodoro clock application that helps you manage your time using the Pomodoro Technique.
 
+Website: https://pomo-pomodoro.com/
+
 ## What is a Pomodoro Clock?
 
 The Pomodoro Technique is a time management method developed by Francesco Cirillo in the late 1980s. It uses a timer to break work into intervals, traditionally 25 minutes in length, separated by short breaks. Each interval is known as a "Pomodoro," named after the tomato-shaped kitchen timer that Cirillo used as a university student.
