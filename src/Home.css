@@ -6,16 +6,102 @@
   overflow: hidden;
 }
 
-.overlay {
-  opacity: 0.4;
-  background-color: #ebebdc;
+/* This is the ONLY blurred layer */
+.bg-blur {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  filter: blur(10px);
+  transform: scale(1.06);
+  transform-origin: center;
 }
 
-svg {
-  height: 100vh;
+/* SVG fills the viewport */
+.arena {
   width: 100vw;
+  height: 100vh;
+  display: block;
 }
 
-circle {
-  opacity: 0.6;
+.timer-container {
+  position: absolute;
+  z-index: 2;
+  opacity: 0.85;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(280px, 38vmin, 520px);
+  aspect-ratio: 4 / 5; /* keeps it proportional */
+  height: auto;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgba(235, 235, 220, 0.85);
+
+  /* Responsive padding */
+  padding: clamp(18px, 3.5vmin, 44px);
+
+  border-radius: 10%;
+  overflow: visible;
+}
+
+#timer-buttons {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 3vmin, 32px);
+  margin-top: clamp(12px, 3vmin, 30px);
+}
+
+/* Base icon button */
+.icon-btn {
+  width: clamp(52px, 8vmin, 72px);
+  height: clamp(52px, 8vmin, 72px);
+  border-radius: 50%;
+
+  border: none;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: all 0.2s ease;
+}
+
+/* SVG inside button */
+.icon-btn svg {
+  width: clamp(22px, 3.2vmin, 30px);
+  height: clamp(22px, 3.2vmin, 30px);
+  fill: currentColor;
+}
+
+/* Primary (Start/Pause) */
+.icon-btn.primary {
+  background-color: #a8542a;
+  color: white;
+}
+
+.icon-btn.primary:hover {
+  background-color: #8d4321;
+  transform: scale(1.05);
+}
+
+/* Cancel button */
+.icon-btn.danger {
+  background-color: #d1c7b8;
+  color: #4e3b10;
+}
+
+.icon-btn.danger:hover {
+  background-color: #bfb5a6;
+  transform: scale(1.05);
+}
+
+/* Click feedback */
+.icon-btn:active {
+  transform: scale(0.95);
 }

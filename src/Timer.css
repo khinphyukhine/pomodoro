@@ -1,20 +1,69 @@
-.timer {
+.timerWrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+  place-items: center;
+
+  pointer-events: none;
+  user-select: none;
+  overflow: visible;
+}
+
+/* SVG stays centered and can overflow for sticker */
+.timerSvg {
+  overflow: visible;
+  display: block;
+}
+
+/* Track */
+.timerTrack {
+  fill: none;
+  stroke: rgba(78, 59, 16, 0.18);
+  stroke-linecap: round;
+
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+/* Progress ring */
+.timerProgress {
+  fill: none;
+  stroke-linecap: round;
+
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+
+  transition: stroke-dashoffset 350ms linear;
+}
+
+/* Sticker */
+.timerSticker {
+  opacity: 1;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.28));
+}
+
+/* Text scales with container */
+.timerText {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  inset: 0;
+  display: grid;
+  place-items: center;
 
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: clamp(32px, 6vw, 96px);
-  letter-spacing: 0.1em;
 
-  color: #ffffff;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
+  /* vmin-like behavior relative to the timerWrap itself */
+  font-size: clamp(34px, 9vmin, 110px);
+  letter-spacing: 0.08em;
+  color: #4e3b10;
+}
 
-  background: rgba(0, 0, 0, 0.35);
-  padding: 12px 20px;
-  border-radius: 12px;
+/* Finished state */
+.timerWrap.finished .timerText {
+  color: #b91c1c;
+}
 
-  backdrop-filter: blur(6px);
-  pointer-events: none;
+.timerWrap.finished .timerSticker {
+  filter: drop-shadow(0 2px 12px rgba(185, 28, 28, 0.35));
 }

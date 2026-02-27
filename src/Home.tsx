@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import './Home.css';
-import { MIN_RADIUS, MAX_RADIUS, COLORS } from './Constants.tsx';
-import Timer from './Timer.tsx';
+import { MIN_RADIUS, MAX_RADIUS, COLORS } from './Constants';
+import Timer from './Timer';
 
 type CircleSpec = {
   cx: number;
@@ -25,8 +25,8 @@ function randBetween(min: number, max: number) {
 }
 
 export default function Home() {
-  // keep your 2..100 count (FYI this can get busy visually)
   const [count] = useState(() => Math.floor(Math.random() * 29) + 2);
+  const [startTimer, setStartTimer] = useState<boolean>(false);
 
   const circlesRef = useRef<CircleSpec[]>([]);
   const circleElsRef = useRef<(SVGCircleElement | null)[]>([]);
@@ -36,7 +36,6 @@ export default function Home() {
     const h = window.innerHeight;
 
     return Array.from({ length: count }, () => {
-      // radius 50–200, clamped to fit screen
       const rawR = randBetween(MIN_RADIUS, MAX_RADIUS);
       const r = Math.min(rawR, w / 2, h / 2);
 
@@ -127,7 +126,7 @@ export default function Home() {
 
   return (
     <div className='home'>
-      <div className='overlay'>
+      <div className='bg-blur' aria-hidden='true'>
         <svg
           className='arena'
           width='100%'
@@ -149,7 +148,45 @@ export default function Home() {
             />
           ))}
         </svg>
-        <Timer />
+      </div>
+
+      <div className='timer-container'>
+        <Timer isRunning={startTimer} stickerSrc='/putu.png' />
+
+        <div id='timer-buttons'>
+          <button
+            className='icon-btn primary'
+            onClick={() => setStartTimer(prev => !prev)}
+            aria-label={startTimer ? 'Pause timer' : 'Start timer'}
+          >
+            {startTimer ? (
+              <svg viewBox='0 0 24 24' aria-hidden='true'>
+                <rect x='6' y='5' width='4' height='14' rx='1' />
+                <rect x='14' y='5' width='4' height='14' rx='1' />
+              </svg>
+            ) : (
+              <svg viewBox='0 0 24 24' aria-hidden='true'>
+                <path d='M8 5v14l11-7z' />
+              </svg>
+            )}
+          </button>
+
+          <button
+            className='icon-btn danger'
+            onClick={() => setStartTimer(false)}
+            aria-label='Cancel timer'
+          >
+            <svg viewBox='0 0 24 24' aria-hidden='true'>
+              <path
+                d='M6 6l12 12M18 6L6 18'
+                strokeWidth='2'
+                stroke='currentColor'
+                fill='none'
+                strokeLinecap='round'
+              />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   );
